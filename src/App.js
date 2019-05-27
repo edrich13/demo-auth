@@ -9,6 +9,9 @@ import './App.css';
 import Home from './components/Home/Home';
 import Login from './components/Login/Login';
 
+import Routes from './_routes/Routes';
+
+
 
 class App extends Component {
   constructor(props) {
@@ -34,23 +37,39 @@ class App extends Component {
       <Router history={history}>
         <div>
           {currentUser &&
-            <nav className="navbar navbar-expand navbar-dark bg-dark">
-              <div className="navbar-nav">
-                <Link to="/" className="nav-item nav-link">Home</Link>
-                <a onClick={this.logout} className="nav-item nav-link">Logout</a>
-              </div>
-            </nav>
-          }
-          <div className="jumbotron">
-            <div className="container">
-              <div className="row">
-                <div className="col-md-6 col-md-offset-3">
-                  <PrivateRoute exact path="/" component={Home} />
-                  <Route path="/login" component={Login} />
+            <div className="container-fluid">
+              <nav className="navbar navbar-default">
+                <div className="container-fluid">
+                  <div className="collapse navbar-collapse">
+                    <div className="nav navbar-nav">
+
+                      <li><Link to="/" className="nav-item nav-link">Home</Link></li>
+                      <li><Link to="/header" className="nav-item nav-link">header</Link></li>
+                      <li><Link to="/footer" className="nav-item nav-link">header</Link></li>
+                      <li><a onClick={this.logout} className="nav-item nav-link">Logout</a></li>
+                    </div>
+                  </div>
+                </div>
+              </nav>
+              <div className="container">
+                <div className="row">
+                  <div className="col-xs-12">
+                    <Routes />
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          }
+          {!currentUser &&
+            <div className="jumbotron">
+              <div className="container">
+                <div className="row">
+                  <div className="col-md-6 col-md-offset-3">
+                    <Route path="/login" component={Login} />
+                  </div>
+                </div>
+              </div>
+            </div>}
         </div>
       </Router>
     );
